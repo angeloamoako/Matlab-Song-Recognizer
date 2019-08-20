@@ -21,7 +21,7 @@ end
 %% Elaborazione
 
 % Carico il campione da testare
-[test, ~] = audioread('test/californication(ok).mp3');
+[test, ~] = audioread('test/californication(ok).MP3');
 
 % Cross correlation
 fprintf('Cross correlating: \n');

@@ -1,12 +1,12 @@
 % Algoritmo di riconoscimento canzoni
-% Angelo Amoako e Daniel Tinazzi
+% Daniel Tinazzi e Angelo Amoako 
 clear all;
 close all;
 clc;
 
 % Prendo i nomi dei file audio
 names = {struct(dir('songs/*.mp3')).name};
-names = names(1:4);
+% names = names(1:4);
 len = length(names);
 
 % Carico i file audio
@@ -21,7 +21,7 @@ end
 %% Elaborazione
 
 % Carico il campione da testare
-[test, ~] = audioread('test/californication(ok).mp3');
+[test, ~] = audioread('test/bohemian_rhapsody.mp3');
 
 % Cross correlation
 fprintf('Cross correlating: \n');
@@ -50,7 +50,7 @@ for i = 1 : len
 end
 
 %% Output
-if (max_element < 0)
+if (max_element < 2100)
     fprintf('Song not recognised.\n');
 else
     time = lag / (44100 * 60 * 60 * 24);

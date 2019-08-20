@@ -6,7 +6,7 @@ clc;
 
 % Prendo i nomi dei file audio
 names = {struct(dir('songs/*.mp3')).name};
-names = names(1:4);
+% names = names(1:4);
 len = length(names);
 
 % Carico i file audio
@@ -21,7 +21,7 @@ end
 %% Elaborazione
 
 % Carico il campione da testare
-[test, ~] = audioread('test/californication(ok).MP3');
+[test, ~] = audioread('test/karma_police1.mp3');
 
 % Cross correlation
 fprintf('Cross correlating: \n');

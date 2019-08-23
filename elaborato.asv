@@ -21,7 +21,7 @@ end
 %% Elaborazione
 
 % Carico il campione da testare
-[test, ~] = audioread('test/help2.mp3');
+[test, ~] = audioread('test/all_the_small_things3.mp3');
 
 % Cross correlation
 fprintf('Cross correlating: \n');
@@ -42,21 +42,29 @@ lag = 0;
 song_index = 0;
 for i = 1 : len
     [maxcorr, maxli] = max(xc{i});
+    temp = max_element;
     if maxcorr > max_element
+        max_element2 = max(temp, max_element2);
+        max_element = max(max_element, max_corr);
+    else if maxcorr > max_element2
+        max_element2 = maxcorr
+    end
+    max_element2 = max(temp, max_element2);
+    max_element = max(max_element, max_corr);
+    if maxcorr > max_element | maxcorr > max_element2
         max_element2 = max_element;
         max_element = maxcorr;
         lag = lagc{i}(maxli);
         song_index = i;
-    elseif maxcorr > max_element2
-        max_element2 = maxcorr;
     end
     fprintf('%i/%i\n', i, len);
 end
 
 %% Output
-if (max_element2 / max_element * 100  < 40)
+fprintf('%i / %i = %i', max_element2, max_element, max_element2 / max_element * 100)
+if (max_element2 / max_element * 100  < 0)
+    fprintf('Song not recognised.\n');
+else
     time = lag / (44100 * 60 * 60 * 24);
     fprintf('Song recognized: %s\nTime: %s\nMatch ratio: %i\n', names{song_index}, datestr(time, 'MM:SS'), max_element);
-else
-    fprintf('Song not recognised.\n');
 end

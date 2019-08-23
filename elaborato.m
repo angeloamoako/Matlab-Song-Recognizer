@@ -21,7 +21,7 @@ end
 %% Elaborazione
 
 % Carico il campione da testare
-[test, ~] = audioread('test/space_oddity1.mp3');
+[test, ~] = audioread('test/help3.mp3');
 
 % Cross correlation
 fprintf('Cross correlating: \n');

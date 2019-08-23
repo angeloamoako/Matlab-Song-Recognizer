@@ -21,7 +21,7 @@ end
 %% Elaborazione
 
 % Carico il campione da testare
-[test, ~] = audioread('test/help2.mp3');
+[test, ~] = audioread('test/help_short3.mp3');
 
 % Cross correlation
 fprintf('Cross correlating: \n');
@@ -54,9 +54,10 @@ for i = 1 : len
 end
 
 %% Output
-if (max_element2 / max_element * 100  < 40)
+ratio = max_element2 / max_element * 100
+if (ratio  < 40)
     time = lag / (44100 * 60 * 60 * 24);
-    fprintf('Song recognized: %s\nTime: %s\nMatch ratio: %i\n', names{song_index}, datestr(time, 'MM:SS'), max_element);
+    fprintf('Song recognized: %s\nTime: %s\nMatch ratio: %i\n', names{song_index}, datestr(time, 'MM:SS'), ratio);
 else
     fprintf('Song not recognised.\n');
 end

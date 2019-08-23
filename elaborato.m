@@ -21,6 +21,7 @@ end
 %% Elaborazione
 
 % Carico il campione da testare
+[test, ~] = audioread('test/all_the_small_things3.mp3');
 
 % Cross correlation
 fprintf('Cross correlating: \n');

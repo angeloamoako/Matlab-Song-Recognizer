@@ -21,7 +21,7 @@ end
 %% Elaborazione
 
 % Carico il campione da testare
-[test, ~] = audioread('test/space_oddity1.mp3');
+[test, ~] = audioread('test/all_the_small_things3.mp3');
 
 % Cross correlation
 fprintf('Cross correlating: \n');
@@ -37,20 +37,25 @@ fprintf('Comparing results to find the max:\n');
 fprintf('0/%i\n', len);
 
 max_element = 0;
+max_element2 = 0;
 lag = 0;
 song_index = 0;
 for i = 1 : len
     [maxcorr, maxli] = max(xc{i});
     if maxcorr > max_element
+        max_element2 = max_element;
         max_element = maxcorr;
         lag = lagc{i}(maxli);
         song_index = i;
+    elseif maxcorr > max_element2
+        max_element2 = maxcorr;
     end
     fprintf('%i/%i\n', i, len);
 end
 
 %% Output
-if (max_element < 0)
+fprintf('%i / %i = %i', max_element2, max_element, max_element2 / max_element * 100)
+if (max_element2 / max_element * 100  < 0)
     fprintf('Song not recognised.\n');
 else
     time = lag / (44100 * 60 * 60 * 24);
